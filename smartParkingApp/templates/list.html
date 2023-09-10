@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>smartParkingApp</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+
+<a href="/addSensor"><button type="button" class="btn btn-primary m-2">Add a plot</button></a>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">PlotNo</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+            {% if item.status == "occupied" %}
+                <tr class="table-success">
+                    <td>{{item.plotNo}}</td>
+                    <td>{{item.status}}</td>
+                    <td>
+                        <a><button type="button" class="btn btn-danger">Book</button></a>
+                        <a><button type="button" class="btn btn-info">Remove</button></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr class="table-danger">
+                    <td>{{item.plotNo}}</td>
+                    <td >{{item.status}}</td>
+                    <td>
+                        <a><button type="button" class="btn btn-danger">Book</button></a>
+                        <a><button type="button" class="btn btn-info">Remove</button></a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>
