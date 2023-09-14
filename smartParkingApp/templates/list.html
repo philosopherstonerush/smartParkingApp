@@ -26,8 +26,10 @@
                     <td>{{item.plotNo}}</td>
                     <td>{{item.status}}</td>
                     <td>
-                        <a><button type="button" class="btn btn-danger">Book</button></a>
-                        <a><button type="button" class="btn btn-info">Remove</button></a>
+                        <form method="POST" action="/remove/{{item.pk}}">
+                            {% csrf_token %}
+                    <input type="submit" value="remove" class="btn btn-danger">
+                        </form>
                     </td>
                 </tr>
             {% else %}
@@ -35,8 +37,10 @@
                     <td>{{item.plotNo}}</td>
                     <td >{{item.status}}</td>
                     <td>
-                        <a><button type="button" class="btn btn-danger">Book</button></a>
-                        <a><button type="button" class="btn btn-info">Remove</button></a>
+                        <form method="POST" action="/book/{{item.pk}}">
+                            {% csrf_token %}
+                            <input value="Book" type="submit" class="btn btn-success">
+                        </form>
                     </td>
                 </tr>
             {% endif %}

@@ -4,6 +4,8 @@ from django.template import loader
 from .models import Slot
 from django.views.decorators.csrf import csrf_protect
 import json
+from djongo import models
+import bson
 
 def showSlots(request):
     if request.method == "GET":
@@ -19,7 +21,23 @@ def addSensor(request):
         content.sensorNo = int(request.POST["sensorNo"])
         content.plotNo = int(request.POST["plotNo"])
         content.status = request.POST["status"]
-        Slot.save(content)
+        content.save()
         return redirect("/")
     if request.method == "GET":
         return render(request, "newPlot.html")
+    
+@csrf_protect
+def removeParking(request, id):
+    if request.method == "POST":
+        slot = Slot.objects.get(pk=id)
+        slot.status = "available"
+        slot.save()
+        return redirect("/")
+    
+@csrf_protect
+def bookParking(request, id):
+    if request.method == "POST":
+        slot = Slot.objects.get(pk=id)
+        slot.status = "occupied"
+        slot.save()
+        return redirect("/")
